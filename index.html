@@ -52,12 +52,15 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      max-width: 100%;
+      overflow: hidden;
     }
     
     .orp-left {
       text-align: right;
       flex: 1;
       color: #9ca3af;
+      word-break: break-all;
     }
     
     .orp-center {
@@ -66,6 +69,7 @@
       font-weight: 700;
       padding: 0 2px;
       position: relative;
+      flex-shrink: 0;
     }
 
     .orp-center::after {
@@ -85,6 +89,7 @@
       text-align: left;
       flex: 1;
       color: #9ca3af;
+      word-break: break-all;
     }
 
     .glass-panel {
@@ -103,87 +108,90 @@
 
   <!-- Encabezado de la Aplicación -->
   <header class="border-b border-gray-800/80 bg-gray-950/80 backdrop-blur-md sticky top-0 z-30">
-    <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+      
+      <!-- Marca / Logo -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-          <i class="fa-solid fa-bolt text-black text-lg font-bold"></i>
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 shrink-0">
+          <i class="fa-solid fa-bolt text-black text-base sm:text-lg font-bold"></i>
         </div>
         <div>
-          <h1 class="font-bold text-lg leading-tight text-white tracking-wide">RSVP <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Fullscreen</span></h1>
-          <p class="text-xs text-gray-400">Lector Rápido Palabra por Palabra</p>
+          <h1 class="font-bold text-base sm:text-lg leading-tight text-white tracking-wide">RSVP <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Fullscreen</span></h1>
+          <p class="text-[11px] sm:text-xs text-gray-400">Lector Rápido Palabra por Palabra</p>
         </div>
       </div>
       
       <!-- Créditos en Encabezado para Escritorio -->
-      <div class="hidden md:flex flex-col items-end text-xs text-gray-400 border-r border-gray-800 pr-4 mr-2">
+      <div class="hidden lg:flex flex-col items-end text-xs text-gray-400 border-r border-gray-800 pr-4 my-1">
         <span class="text-gray-300 font-medium"><i class="fa-solid fa-code text-emerald-400 mr-1"></i>Santiago Cid Solano</span>
         <span class="text-gray-500 text-[11px]">UNAM — Facultad de Filosofía y Letras</span>
       </div>
 
+      <!-- Botón de acción rápida -->
       <div class="flex items-center gap-2">
-        <button id="btnOpenFullscreenManual" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white transition-all text-xs border border-gray-800">
+        <button id="btnOpenFullscreenManual" class="flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white transition-all text-xs border border-gray-800">
           <i class="fa-solid fa-expand text-emerald-400"></i>
-          <span class="hidden sm:inline">Probar Pantalla Completa</span>
+          <span class="hidden sm:inline">Pantalla Completa</span>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-5xl w-full mx-auto px-4 py-6 flex-grow flex flex-col gap-6">
+  <main class="max-w-5xl w-full mx-auto px-3 sm:px-4 py-4 sm:py-6 flex-grow flex flex-col gap-4 sm:gap-6">
 
     <!-- Panel de Configuración e Inicio -->
-    <section class="glass-panel rounded-2xl p-6 grid grid-cols-1 md:grid-cols-12 gap-6 shadow-2xl">
+    <section class="glass-panel rounded-2xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 shadow-2xl">
       
       <!-- Lado Izquierdo: Controles de Lectura -->
-      <div class="md:col-span-6 flex flex-col justify-between gap-5">
+      <div class="md:col-span-6 flex flex-col justify-between gap-4 sm:gap-5">
         <div>
-          <h2 class="text-xl font-bold text-white mb-1 flex items-center gap-2">
+          <h2 class="text-lg sm:text-xl font-bold text-white mb-1 flex items-center gap-2">
             <i class="fa-solid fa-sliders text-emerald-400 text-sm"></i> Configuración de Lectura
           </h2>
           <p class="text-xs text-gray-400">Al presionar "Iniciar Lectura", pasarás automáticamente a pantalla completa.</p>
         </div>
 
         <!-- Control WPM -->
-        <div class="space-y-2 bg-gray-950/50 p-4 rounded-xl border border-gray-800/60">
+        <div class="space-y-2 bg-gray-950/50 p-3.5 sm:p-4 rounded-xl border border-gray-800/60">
           <div class="flex justify-between items-center">
-            <span class="text-sm font-medium text-gray-300 flex items-center gap-2">
+            <span class="text-xs sm:text-sm font-medium text-gray-300 flex items-center gap-1.5">
               <i class="fa-solid fa-gauge-high text-emerald-400"></i> Velocidad WPM:
             </span>
-            <span class="text-emerald-400 font-bold font-mono text-lg"><span id="wpmDisplay">300</span> <span class="text-xs text-gray-500">Palabras/min</span></span>
+            <span class="text-emerald-400 font-bold font-mono text-base sm:text-lg"><span id="wpmDisplay">300</span> <span class="text-[10px] sm:text-xs text-gray-500">Palabras/min</span></span>
           </div>
           <input type="range" id="wpmInput" min="100" max="1000" step="25" value="300" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer">
-          <div class="flex justify-between gap-1 pt-1">
-            <button class="wpm-preset px-2 py-1 text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800" data-wpm="200">200 Suave</button>
-            <button class="wpm-preset px-2 py-1 text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800" data-wpm="350">350 Medio</button>
-            <button class="wpm-preset px-2 py-1 text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800" data-wpm="500">500 Rápido</button>
-            <button class="wpm-preset px-2 py-1 text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800" data-wpm="750">750 Pro</button>
+          <div class="grid grid-cols-4 gap-1 pt-1">
+            <button class="wpm-preset px-1.5 py-1 text-[11px] sm:text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 text-center truncate" data-wpm="200">200 Suave</button>
+            <button class="wpm-preset px-1.5 py-1 text-[11px] sm:text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 text-center truncate" data-wpm="350">350 Medio</button>
+            <button class="wpm-preset px-1.5 py-1 text-[11px] sm:text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 text-center truncate" data-wpm="500">500 Rápido</button>
+            <button class="wpm-preset px-1.5 py-1 text-[11px] sm:text-xs rounded bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 text-center truncate" data-wpm="750">750 Pro</button>
           </div>
         </div>
 
         <!-- Botón Gigante de Iniciar Lectura en Pantalla Completa -->
-        <button id="btnStartFullscreen" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-bold text-lg shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-3 group active:scale-98">
-          <i class="fa-solid fa-play text-xl group-hover:scale-110 transition-transform"></i>
+        <button id="btnStartFullscreen" class="w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-bold text-base sm:text-lg shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2.5 sm:gap-3 group active:scale-98">
+          <i class="fa-solid fa-play text-lg sm:text-xl group-hover:scale-110 transition-transform"></i>
           <span>Iniciar en Pantalla Completa</span>
         </button>
       </div>
 
       <!-- Lado Derecho: Previsualización Miniatura -->
-      <div class="md:col-span-6 flex flex-col justify-between bg-gray-950/80 rounded-xl p-5 border border-gray-800/80 relative overflow-hidden min-h-[200px]">
+      <div class="md:col-span-6 flex flex-col justify-between bg-gray-950/80 rounded-xl p-4 sm:p-5 border border-gray-800/80 relative overflow-hidden min-h-[160px] sm:min-h-[200px]">
         <div class="flex justify-between items-center text-xs text-gray-400 border-b border-gray-800 pb-2">
           <span>Vista previa del visor</span>
-          <span class="text-emerald-400 font-mono"><i class="fa-solid fa-eye mr-1"></i>ORP Activo</span>
+          <span class="text-emerald-400 font-mono text-[11px]"><i class="fa-solid fa-eye mr-1"></i>ORP Activo</span>
         </div>
 
         <!-- Muestra Miniatura -->
-        <div class="my-auto py-6 text-center">
-          <div id="previewWordDisplay" class="font-mono-rsvp text-3xl sm:text-4xl font-bold tracking-tight">
+        <div class="my-auto py-4 sm:py-6 text-center w-full overflow-hidden">
+          <div id="previewWordDisplay" class="font-mono-rsvp text-2xl sm:text-4xl font-bold tracking-tight px-1">
             <span class="orp-wrapper">
               <span class="orp-left" id="previewLeft">Palabra</span><span class="orp-center" id="previewCenter">P</span><span class="orp-right" id="previewRight">rimero</span>
             </span>
           </div>
         </div>
 
-        <div class="text-xs text-gray-500 text-center border-t border-gray-800/80 pt-2">
+        <div class="text-[11px] sm:text-xs text-gray-500 text-center border-t border-gray-800/80 pt-2">
           Punto óptimo resaltado en verde fosforescente
         </div>
       </div>
@@ -191,119 +199,126 @@
     </section>
 
     <!-- Área de Entrada de Texto -->
-    <section class="glass-panel rounded-2xl p-6 flex flex-col gap-4 shadow-xl">
+    <section class="glass-panel rounded-2xl p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 shadow-xl">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <label for="textInput" class="text-sm font-semibold text-gray-200 flex items-center gap-2">
+        <label for="textInput" class="text-xs sm:text-sm font-semibold text-gray-200 flex items-center gap-2">
           <i class="fa-solid fa-align-left text-emerald-400"></i> Pega o escribe tu texto aquí:
         </label>
-        <div class="flex items-center gap-2 text-xs">
-          <button id="btnSampleText" class="px-3 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition-all">
-            <i class="fa-solid fa-file-lines mr-1 text-emerald-400"></i> Texto de Ejemplo
+        <div class="flex items-center gap-2 text-xs w-full sm:w-auto justify-end">
+          <button id="btnSampleText" class="px-2.5 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition-all text-xs">
+            <i class="fa-solid fa-file-lines mr-1 text-emerald-400"></i> Ejemplo
           </button>
-          <button id="btnClearText" class="px-3 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-rose-400 border border-gray-800 transition-all">
+          <button id="btnClearText" class="px-2.5 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-rose-400 border border-gray-800 transition-all text-xs">
             <i class="fa-solid fa-trash-can mr-1"></i> Borrar
           </button>
         </div>
       </div>
 
-      <textarea id="textInput" rows="7" placeholder="Escribe o pega aquí el texto que deseas leer a alta velocidad..." class="w-full bg-gray-950 border border-gray-800 rounded-xl p-4 text-gray-200 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all resize-y text-base leading-relaxed font-sans"></textarea>
+      <textarea id="textInput" rows="6" placeholder="Escribe o pega aquí el texto que deseas leer a alta velocidad..." class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 sm:p-4 text-gray-200 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all resize-y text-sm sm:text-base leading-relaxed font-sans"></textarea>
 
       <!-- Estadísticas -->
-      <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-400 border-t border-gray-800/80 pt-3">
-        <div class="flex items-center gap-4 font-mono">
+      <div class="flex flex-wrap items-center justify-between gap-2 sm:gap-4 text-xs text-gray-400 border-t border-gray-800/80 pt-3">
+        <div class="flex flex-wrap items-center gap-3 font-mono text-[11px] sm:text-xs">
           <span>Palabras: <strong id="statWords" class="text-emerald-400">0</strong></span>
           <span>Caracteres: <strong id="statChars" class="text-gray-200">0</strong></span>
           <span>Tiempo estim.: <strong id="statTime" class="text-gray-200">0m 0s</strong></span>
-  <footer class="border-t border-gray-800/60 py-5 text-center text-xs text-gray-500 bg-gray-950/40">
-    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div>
-        Aplicación RSVP en Pantalla Completa — Lectura de alto rendimiento.
+        </div>
       </div>
-      <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900/80 border border-gray-800/80 text-gray-300">
-        <i class="fa-solid fa-graduation-cap text-emerald-400"></i>
-        <span>Desarrollado por <strong>Santiago Cid Solano</strong> — UNAM Facultad de Filosofía y Letras</span>
+    </section>
+
+  </main>
+
+  <!-- Pie de página con créditos completamente responsivos -->
+  <footer class="border-t border-gray-800/60 py-4 sm:py-5 text-xs text-gray-500 bg-gray-950/40 mt-4">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <div class="text-[11px] sm:text-xs text-gray-400">
+        Aplicación RSVP en Pantalla Completa
+      </div>
+      <div class="w-full sm:w-auto flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-gray-900/80 border border-gray-800/80 text-gray-300 text-[11px] sm:text-xs leading-normal max-w-full overflow-hidden">
+        <i class="fa-solid fa-graduation-cap text-emerald-400 text-sm shrink-0"></i>
+        <span class="break-words max-w-full">Desarrollado por <strong class="text-white">Santiago Cid Solano</strong> <span class="hidden sm:inline">—</span> <br class="sm:hidden" />UNAM Facultad de Filosofía y Letras</span>
       </div>
     </div>
   </footer>
 
   <!-- MODAL / INTERFAZ DE PANTALLA COMPLETA DEDICADA -->
-  <div id="fullscreenReaderScreen" class="fixed inset-0 z-50 bg-black flex flex-col justify-between p-6 sm:p-10 hidden select-none">
+  <div id="fullscreenReaderScreen" class="fixed inset-0 z-50 bg-black flex flex-col justify-between p-4 sm:p-8 hidden select-none overflow-hidden">
     
     <!-- Barra Superior Flotante en Pantalla Completa -->
-    <div class="w-full max-w-5xl mx-auto flex justify-between items-center text-gray-400 text-sm">
-      <div class="flex items-center gap-3">
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <div class="flex flex-col">
-          <span class="font-mono text-xs uppercase tracking-widest text-gray-400">RSVP Modo Enfoque</span>
-          <span class="text-[10px] text-gray-500">Santiago Cid Solano — UNAM FFyL</span>
+    <div class="w-full max-w-5xl mx-auto flex justify-between items-center text-gray-400 text-xs sm:text-sm gap-2">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-gray-400 truncate">RSVP Modo Enfoque</span>
+          <span class="text-[9px] sm:text-[11px] text-gray-500 truncate">Santiago Cid Solano — UNAM FFyL</span>
         </div>
       </div>
 
       <!-- Controles Superiores -->
-      <div class="flex items-center gap-4">
-        <div class="flex items-center gap-2 bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800">
-          <i class="fa-solid fa-gauge-high text-emerald-400 text-xs"></i>
-          <span class="font-mono text-xs font-bold text-white" id="fsWpmText">300 WPM</span>
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <div class="flex items-center gap-1.5 bg-gray-900/80 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-gray-800">
+          <i class="fa-solid fa-gauge-high text-emerald-400 text-[10px] sm:text-xs"></i>
+          <span class="font-mono text-[10px] sm:text-xs font-bold text-white" id="fsWpmText">300 WPM</span>
         </div>
 
-        <button id="btnExitFullscreen" class="px-3.5 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 text-xs flex items-center gap-2 transition-all">
+        <button id="btnExitFullscreen" class="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 text-[11px] sm:text-xs flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-compress text-rose-400"></i>
-          <span>Salir (ESC)</span>
+          <span>Salir <span class="hidden sm:inline">(ESC)</span></span>
         </button>
       </div>
     </div>
 
     <!-- ÁREA CENTRAL DE LECTURA (PALABRA GIGANTE CON ORP) -->
-    <div class="my-auto w-full max-w-6xl mx-auto flex flex-col justify-center items-center py-10">
+    <div class="my-auto w-full max-w-6xl mx-auto flex flex-col justify-center items-center py-6 sm:py-10 px-2">
       
       <!-- Guías Visuales del Centro Focal -->
-      <div class="w-full flex justify-center items-center opacity-30 pointer-events-none mb-4">
-        <div class="w-1.5 h-6 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500"></div>
+      <div class="w-full flex justify-center items-center opacity-30 pointer-events-none mb-2 sm:mb-4">
+        <div class="w-1.5 h-4 sm:h-6 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500"></div>
       </div>
 
-      <div id="fsWordDisplay" class="font-mono-rsvp w-full text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-center">
+      <div id="fsWordDisplay" class="font-mono-rsvp w-full text-3xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-center overflow-hidden">
         <span class="orp-wrapper">
           <span class="orp-left" id="fsLeft"></span><span class="orp-center" id="fsCenter"></span><span class="orp-right" id="fsRight"></span>
         </span>
       </div>
 
-      <div class="w-full flex justify-center items-center opacity-30 pointer-events-none mt-4">
-        <div class="w-1.5 h-6 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500"></div>
+      <div class="w-full flex justify-center items-center opacity-30 pointer-events-none mt-2 sm:mt-4">
+        <div class="w-1.5 h-4 sm:h-6 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500"></div>
       </div>
 
     </div>
 
     <!-- CONTROLES INFERIORES Y BARRA DE PROGRESO -->
-    <div class="w-full max-w-4xl mx-auto space-y-4">
+    <div class="w-full max-w-4xl mx-auto space-y-3 sm:space-y-4">
       
       <!-- Barra de Progreso Interactiva -->
-      <div class="space-y-1.5">
-        <div class="flex justify-between items-center text-xs font-mono text-gray-400">
+      <div class="space-y-1">
+        <div class="flex justify-between items-center text-[10px] sm:text-xs font-mono text-gray-400">
           <span id="fsProgressCount">Palabra 0 / 0</span>
           <span id="fsTimeRemaining">Tiempo: --:--</span>
           <span id="fsPercentage">0%</span>
         </div>
-        <div id="fsProgressBarContainer" class="w-full h-2.5 bg-gray-900 rounded-full overflow-hidden cursor-pointer border border-gray-800">
+        <div id="fsProgressBarContainer" class="w-full h-2 sm:h-2.5 bg-gray-900 rounded-full overflow-hidden cursor-pointer border border-gray-800">
           <div id="fsProgressBar" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 w-0 transition-all duration-75"></div>
         </div>
       </div>
 
       <!-- Botones de Control en Pantalla Completa -->
-      <div class="flex items-center justify-center gap-4 pt-2">
-        <button id="btnFsReset" class="p-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 transition-all" title="Reiniciar">
+      <div class="flex items-center justify-center gap-2 sm:gap-4 pt-1">
+        <button id="btnFsReset" class="p-2.5 sm:p-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 transition-all text-xs sm:text-base" title="Reiniciar">
           <i class="fa-solid fa-rotate-left"></i>
         </button>
 
-        <button id="btnFsStepBack" class="p-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 transition-all" title="Retroceder 10 palabras (←)">
+        <button id="btnFsStepBack" class="p-2.5 sm:p-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 transition-all text-xs sm:text-base" title="Retroceder 10 palabras (←)">
           <i class="fa-solid fa-backward"></i>
         </button>
 
-        <button id="btnFsPlayPause" class="px-8 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-3 text-lg">
+        <button id="btnFsPlayPause" class="px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2 sm:gap-3 text-sm sm:text-lg">
           <i class="fa-solid fa-pause" id="fsPlayIcon"></i>
           <span id="fsPlayText">Pausar</span>
         </button>
 
-        <button id="btnFsStepForward" class="p-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 transition-all" title="Avanzar 10 palabras (→)">
+        <button id="btnFsStepForward" class="p-2.5 sm:p-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-800 transition-all text-xs sm:text-base" title="Avanzar 10 palabras (→)">
           <i class="fa-solid fa-forward"></i>
         </button>
       </div>
